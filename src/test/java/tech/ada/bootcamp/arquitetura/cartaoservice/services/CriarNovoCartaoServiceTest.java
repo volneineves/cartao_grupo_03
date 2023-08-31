@@ -31,9 +31,9 @@ public class CriarNovoCartaoServiceTest {
     void shouldSaveSuccessfullyANewCard(){
         CadastroUsuarioRequest cadastroUsuarioRequest = Mockito.mock(CadastroUsuarioRequest.class);
 
-        Mockito.when(cadastroUsuarioRequest.getTipoCartao()).thenReturn(TipoCartao.OURO);
-        Mockito.when(cadastroUsuarioRequest.getIdentificador()).thenReturn("00000000000");
-        Mockito.when(cadastroUsuarioRequest.getNome()).thenReturn("Jose Joao da Silva");
+//        Mockito.when(cadastroUsuarioRequest.getTipoCartao()).thenReturn(TipoCartao.OURO);
+//        Mockito.when(cadastroUsuarioRequest.getIdentificador()).thenReturn("00000000000");
+//        Mockito.when(cadastroUsuarioRequest.getNome()).thenReturn("Jose Joao da Silva");
 
         criarNovoCartaoService.execute(cadastroUsuarioRequest);
 
