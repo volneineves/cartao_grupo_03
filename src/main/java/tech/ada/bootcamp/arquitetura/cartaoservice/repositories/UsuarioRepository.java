@@ -6,4 +6,6 @@ import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
+
+    Boolean existsByEmail(String email);
 }

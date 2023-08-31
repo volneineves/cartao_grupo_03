@@ -18,16 +18,16 @@ import java.util.stream.IntStream;
 public class CriarNovoCartaoService {
     private final CartaoRepository cartaoRepository;
     private static Random random;
-    public Cartao execute(CadastroUsuarioRequest cadastroUsuarioRequest){
+    public Cartao execute(CadastroUsuarioRequest request){
         LocalDate dataAtual = LocalDate.now();
         Cartao cartao = new Cartao();
 
-        cartao.setTipoCartao(cadastroUsuarioRequest.getTipoCartao());
+//        cartao.setTipoCartao(cadastroUsuarioRequest.getTipoCartao()); TODO
         Usuario usuario =  new Usuario();
 //        usuario.setId(cadastroUsuarioRequest.getIdentificador()); // TODO fix
         cartao.setUsuario(usuario);
         cartao.setIdContaBanco(UUID.randomUUID().toString());
-        cartao.setNomeTitular(cadastroUsuarioRequest.getNome());
+//        cartao.setNomeTitular(cadastroUsuarioRequest.getNome()); TODO
         cartao.setVencimentoCartao(dataAtual.plusYears(5));
         cartao.setCodigoSeguranca(gerarNumeroAleatorio(3));
         cartao.setNumeroCartao(gerarNumeroAleatorio(12));

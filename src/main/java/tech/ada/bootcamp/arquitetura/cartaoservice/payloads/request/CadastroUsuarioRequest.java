@@ -1,22 +1,29 @@
 package tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request;
 
-import lombok.Getter;
-import lombok.Setter;
-import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.TipoCartao;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
-import java.util.List;
 
-@Getter
-@Setter
-public class CadastroUsuarioRequest {
-    private String identificador;
+public record CadastroUsuarioRequest(
 
-    private String nome;
-    private EnderecoRequest enderecoRequest;
+        @NotNull
+        String nome,
 
-    private TipoCartao tipoCartao;
+        @Size(max = 100)
+        @NotNull
+        @NotEmpty
+        @Email
+        String email,
 
-    private List<String> dependentes;
+        @NotNull
+        LocalDate aniversario,
 
+        @Valid
+        @NotNull
+        EnderecoRequest endereco
+) {
 }

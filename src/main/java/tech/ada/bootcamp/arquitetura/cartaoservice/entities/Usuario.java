@@ -2,14 +2,18 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CadastroUsuarioRequest;
+import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CadastroUsuarioResponse;
 
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -35,8 +39,18 @@ public class Usuario {
     @Column(nullable = false)
     private Date atualizadoEm;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = false, mappedBy = "usuario")
-    @JoinColumn(name = "id_usuario")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
+    @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
+    public Usuario(CadastroUsuarioRequest request) {
+        this.nome = request.nome();
+        this.email = request.email();
+        this.aniversario = request.aniversario();
+        this.endereco = new Endereco(request.endereco());
+    }
+
+    public CadastroUsuarioResponse toResponse() {
+        return new CadastroUsuarioResponse(id, nome, email, aniversario, endereco.toResponse(), criadoEm, atualizadoEm);
+    }
 }
