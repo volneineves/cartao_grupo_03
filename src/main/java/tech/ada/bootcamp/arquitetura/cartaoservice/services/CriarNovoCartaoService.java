@@ -24,7 +24,7 @@ public class CriarNovoCartaoService {
 
         cartao.setTipoCartao(cadastroUsuarioRequest.getTipoCartao());
         Usuario usuario =  new Usuario();
-        usuario.setIdentificador(cadastroUsuarioRequest.getIdentificador());
+//        usuario.setId(cadastroUsuarioRequest.getIdentificador()); // TODO fix
         cartao.setUsuario(usuario);
         cartao.setIdContaBanco(UUID.randomUUID().toString());
         cartao.setNomeTitular(cadastroUsuarioRequest.getNome());
