@@ -1,14 +1,15 @@
 package tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response;
 
-import lombok.Data;
-import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.TipoCartao;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.UUID;
 
-@Data
-public class CadastroUsuarioResponse {
-    private String numeroCartao;
-    private String nomeTitularCartao;
-
-    private TipoCartao tipoCartao;
-
-    private String nomeTitularConta;
+public record CadastroUsuarioResponse(
+        UUID id,
+        String nome,
+        String email,
+        LocalDate aniversario,
+        EnderecoResponse endereco,
+        Date criadoEm,
+        Date atualizadoEm) {
 }
