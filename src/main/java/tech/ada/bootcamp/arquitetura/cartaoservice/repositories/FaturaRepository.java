@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Fatura;
+import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.FaturaResponse;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.TotalComprasProjection;
 
 import java.time.LocalDateTime;
@@ -18,4 +19,7 @@ public interface FaturaRepository extends JpaRepository<Fatura, UUID> {
             "WHERE c.dataCompra BETWEEN :dataInicio AND :dataFim " +
             "GROUP BY c.cartao.id")
     List<TotalComprasProjection> findTotalComprasByData(LocalDateTime dataInicio, LocalDateTime dataFim);
+
+    @Query("SELECT f FROM Fatura f WHERE f.cartao.usuario.id = :idUsuario")
+    List<Fatura> findAllByUsuario(UUID idUsuario);
 }

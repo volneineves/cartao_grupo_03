@@ -31,6 +31,10 @@ public class FaturaService {
         return fatura.toResponse();
     }
 
+    public List<FaturaResponse> findAllByUsuario(UUID idUsuario){
+        return repository.findAllByUsuario(idUsuario).stream().map(Fatura::toResponse).toList();
+    }
+
     public void createInvoices() {
         LocalDateTime firstDayOfMonth = getFirstDayOfCurrentMonth();
         LocalDateTime lastDayOfMonth = getLastDayOfCurrentMonth();
