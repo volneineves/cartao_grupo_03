@@ -10,11 +10,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/invoices")
-public class invoiceController {
+public class InvoiceController {
 
     private final InvoiceService service;
 
-    public invoiceController(InvoiceService service) {
+    public InvoiceController(InvoiceService service) {
         this.service = service;
     }
 
@@ -28,11 +28,5 @@ public class invoiceController {
     public ResponseEntity<List<InvoiceResponse>> getAllByUserId(@RequestParam UUID idUser) {
         List<InvoiceResponse> response = service.findAllByUser(idUser);
         return ResponseEntity.ok(response);
-    }
-
-    @PostMapping
-    public ResponseEntity<Void> create() {
-        service.createInvoices();
-        return ResponseEntity.ok().build();
     }
 }

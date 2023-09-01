@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.ResponseCard;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,6 +38,9 @@ public class Card {
     @Column(nullable = false)
     private String bankAccountId;
 
+    @Column(nullable = false)
+    private Integer closingDay;
+
     private Boolean isDependent = Boolean.FALSE;
 
     @ManyToOne
@@ -48,10 +50,7 @@ public class Card {
     @OneToMany(mappedBy = "card", fetch = FetchType.EAGER)
     private List<Purchase> purchases;
 
-    @OneToMany(mappedBy = "card")
-    private List<Invoice> invoices = new ArrayList<>();
-
-    public ResponseCard toResponse(){
+    public ResponseCard toResponse() {
         return new ResponseCard(
                 this.id,
                 this.number,
@@ -61,6 +60,7 @@ public class Card {
                 this.type,
                 this.bankAccountId,
                 this.isDependent,
+                this.closingDay,
                 this.user.getId()
         );
     }

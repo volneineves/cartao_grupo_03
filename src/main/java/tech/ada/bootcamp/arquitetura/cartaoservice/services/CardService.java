@@ -51,6 +51,10 @@ public class CardService {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Card could not be found"));
     }
 
+    public List<Card> findAllByClosingDay(Integer closingDay){
+        return repository.findAllByClosingDay(closingDay);
+    }
+
     public ResponseCard create(RequestCard requestCard) {
 
         String accountNumber = prepareRandomNumber(5);
@@ -70,6 +74,7 @@ public class CardService {
         card.setNumber(cardNumber);
         card.setType(cardType);
         card.setIsDependent(requestCard.isDependent());
+        card.setClosingDay(requestCard.closingDay());
 
         saveOrFail(card);
         return card.toResponse();
@@ -111,12 +116,8 @@ public class CardService {
 
     private void saveOrFail(Card card) {
         try {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             repository.saveAndFlush(card);
         } catch (Exception e) {
-            System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-
-            System.out.println(e.getMessage());
             throw new DatabaseException("Error while saving card");
         }
     }

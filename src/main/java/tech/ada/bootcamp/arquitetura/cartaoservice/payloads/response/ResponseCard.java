@@ -6,13 +6,14 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public record ResponseCard(UUID id,
-                           String cardNumber,
-                           String cardholderName,
-                           LocalDate cardExpirationDate,
+                           String number,
+                           String holderName,
+                           LocalDate expiry,
                            String securityCode,
                            CardType cardType,
                            String bankAccountId,
                            Boolean isDependent,
+                           Integer closingDay,
                            UUID userId) {
 
 }
