@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CompraRequest;
+import org.hibernate.annotations.CreationTimestamp;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CompraResponse;
 
 import java.math.BigDecimal;
@@ -16,28 +17,31 @@ import java.util.UUID;
 @Table(name = "compra")
 public class Compra {
 
-    @Column(nullable = false, precision = 10, scale = 2) // TODO verificar precisao
-    public BigDecimal valor;
-    @ManyToOne
-    @JoinColumn(name = "id_cartao", nullable = false)
-    public Cartao cartao;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    public StatusCompra statusCompra;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    public BigDecimal valor;
+    
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    public StatusCompra statusCompra;
+    
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
     private LocalDateTime dataCompra;
 
+    @Column(nullable = false)
     private String loja;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cartao", nullable = false)
+    public Cartao cartao;
+
 
     public Compra() {
 
-    }
-
-    public CompraResponse toResponse() {
-        return new CompraResponse(cartao.getNumeroCartao(), loja, valor, statusCompra);
     }
 
     public Compra(CompraRequest compraRequest) {
@@ -48,5 +52,9 @@ public class Compra {
         this.cartao = cartao;
         this.dataCompra = LocalDateTime.now();
         this.statusCompra = StatusCompra.PENDENTE;
+    }
+
+    public CompraResponse toResponse() {
+        return new CompraResponse(cartao.getNumeroCartao(), loja, valor, statusCompra);
     }
 }
