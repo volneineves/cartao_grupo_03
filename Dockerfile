@@ -11,4 +11,4 @@ RUN gradle bootJar
 #Start from a java:17
 RUN mv /home/gradle/project/build/libs/*.jar /home/gradle/project/app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-Dspring.profiles.active=dev","-jar","/home/gradle/project/app.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=test","-jar","/home/gradle/project/app.jar"]
