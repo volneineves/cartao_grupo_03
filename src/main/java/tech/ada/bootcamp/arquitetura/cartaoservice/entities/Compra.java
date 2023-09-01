@@ -43,6 +43,9 @@ public class Compra {
     public Compra(CompraRequest compraRequest) {
         this.valor = compraRequest.getValor();
         this.loja = compraRequest.getLoja();
+        Cartao cartao = new Cartao();
+        cartao.setNumeroCartao(compraRequest.getNumeroCartao());
+        this.cartao = cartao;
         this.dataCompra = LocalDateTime.now();
         this.statusCompra = StatusCompra.PENDENTE;
     }
