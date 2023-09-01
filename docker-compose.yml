@@ -1,16 +1,32 @@
 version: "3"
 services:
-  cartao_db:
-    image: postgres:10
-    volumes:
-      - db-data:/var/lib/postgresql/data1
+  postgres:
+    image: postgres:latest
+    hostname: postgres
     environment:
-      POSTGRES_PASSWORD: cartao
       POSTGRES_USER: cartao
+      POSTGRES_PASSWORD: cartao
       POSTGRES_DB: cartao
     ports:
       - "5433:5432"
+    networks:
+      - store
+    restart: unless-stopped
 
-volumes:
-  db-data:
-    driver: local
+  api:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres:5432/cartao
+      DATABASE_USERNAME: cartao
+      DATABASE_PASSWORD: cartao
+    ports:
+      - "8080:8080"
+    networks:
+      - store
+    restart: unless-stopped
+
+networks:
+  store:
+    driver: bridge

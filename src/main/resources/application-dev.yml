@@ -1,8 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/cartao
-    username: cartao
-    password: cartao
+    url: jdbc:postgresql://${DATABASE_URL:localhost:5432/avanade_store}
+    driverClassName: org.postgresql.Driver
+    username: ${DATABASE_USERNAME:cartao}
+    password: ${DATABASE_PASSWORD:cartao}
     continue-on-error: true
   jpa:
     open-in-view: false
