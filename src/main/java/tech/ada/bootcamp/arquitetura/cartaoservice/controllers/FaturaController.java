@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.FaturaResponse;
 import tech.ada.bootcamp.arquitetura.cartaoservice.services.FaturaService;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -18,8 +19,20 @@ public class FaturaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FaturaResponse> getInvoiceById(@PathVariable("id") UUID id) {
+    public ResponseEntity<FaturaResponse> getById(@PathVariable("id") UUID id) {
         FaturaResponse response = service.findById(id);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<FaturaResponse>> getAllByUserId(@RequestParam UUID idUser) {
+        List<FaturaResponse> response = service.findAllByUsuario(idUser);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> create() {
+        service.createInvoices();
+        return ResponseEntity.ok().build();
     }
 }
