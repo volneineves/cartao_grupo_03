@@ -2,13 +2,18 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.TipoCartao;
+import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CartaoResponse;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "cartao")
 public class Cartao {
 
@@ -40,5 +45,32 @@ public class Cartao {
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
+
+    public Cartao(CartaoResponse dto){
+        this.numeroCartao = dto.getNumeroCartao();
+        this.nomeTitular = dto.getNomeTitular();
+        this.vencimentoCartao = dto.getVencimentoCartao();
+        this.codigoSeguranca = dto.getCodigoSeguranca();
+        this.tipoCartao = dto.getTipoCartao();
+        this.idContaBanco = dto.getIdContaBanco();
+        this.dependente = dto.getDependente();
+        this.usuario = dto.getUsuario();
+    }
+
+    public CartaoResponse dto(){
+        CartaoResponse response = new CartaoResponse(
+                this.numeroCartao,
+                this.nomeTitular,
+                this.vencimentoCartao,
+                this.codigoSeguranca,
+                this.tipoCartao,
+                this.idContaBanco,
+                this.dependente,
+                this.usuario
+        );
+
+        return response;
+    }
 
 }
