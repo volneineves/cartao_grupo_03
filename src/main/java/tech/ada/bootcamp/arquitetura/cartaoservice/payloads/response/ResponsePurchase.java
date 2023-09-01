@@ -1,6 +1,6 @@
 package tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response;
 
-import tech.ada.bootcamp.arquitetura.cartaoservice.entities.PurchaseStatus;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.PurchaseStatus;
 
 import java.math.BigDecimal;
 import java.util.UUID;

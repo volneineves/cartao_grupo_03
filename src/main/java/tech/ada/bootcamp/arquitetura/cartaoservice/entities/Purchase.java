@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.PurchaseStatus;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.PurchaseRequest;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.ResponsePurchase;
 

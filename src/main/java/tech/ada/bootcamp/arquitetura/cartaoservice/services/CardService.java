@@ -2,8 +2,8 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.services;
 
 import org.springframework.stereotype.Service;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Card;
-import tech.ada.bootcamp.arquitetura.cartaoservice.entities.CardType;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.User;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.CardType;
 import tech.ada.bootcamp.arquitetura.cartaoservice.exceptions.DatabaseException;
 import tech.ada.bootcamp.arquitetura.cartaoservice.exceptions.ResourceNotFoundException;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.RequestCard;

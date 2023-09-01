@@ -3,6 +3,7 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.CardType;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.ResponseCard;
 
 import java.time.LocalDate;

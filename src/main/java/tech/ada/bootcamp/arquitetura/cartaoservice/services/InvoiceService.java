@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Card;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Invoice;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Purchase;
-import tech.ada.bootcamp.arquitetura.cartaoservice.entities.PurchaseStatus;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.PurchaseStatus;
 import tech.ada.bootcamp.arquitetura.cartaoservice.exceptions.DatabaseException;
 import tech.ada.bootcamp.arquitetura.cartaoservice.exceptions.ResourceNotFoundException;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.InvoiceResponse;
