@@ -2,13 +2,11 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Cartao;
-import tech.ada.bootcamp.arquitetura.cartaoservice.entities.TipoCartao;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.TipoCartao;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Usuario;
 import tech.ada.bootcamp.arquitetura.cartaoservice.exceptions.CartaoNaoEncontradoException;
-import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CadastroUsuarioRequest;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CartaoRequest;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CartaoResponse;
 import tech.ada.bootcamp.arquitetura.cartaoservice.repositories.CartaoRepository;

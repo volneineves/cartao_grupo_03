@@ -2,8 +2,7 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import tech.ada.bootcamp.arquitetura.cartaoservice.entities.TipoCartao;
-import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Usuario;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.TipoCartao;
 
 import java.time.LocalDate;
 import java.util.UUID;

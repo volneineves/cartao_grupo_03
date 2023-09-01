@@ -3,11 +3,12 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Compra;
-import tech.ada.bootcamp.arquitetura.cartaoservice.entities.StatusCompra;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.StatusCompra;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CompraRequest;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CompraResponse;
 import tech.ada.bootcamp.arquitetura.cartaoservice.repositories.CompraRepository;
-import tech.ada.bootcamp.arquitetura.cartaoservice.repositories.FaturaRepository;
+import tech.ada.bootcamp.arquitetura.cartaoservice.strategy.PaymentStrategy;
+import tech.ada.bootcamp.arquitetura.cartaoservice.strategy.PaymentStrategyFactory;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -20,19 +21,12 @@ public class RealizarCompraService {
 
   public CompraResponse execute(CompraRequest compraRequest) {
 
-    boolean compraAprovada = verificarComBanco(compraRequest.getIdCartao(), compraRequest.getValor());
+    PaymentStrategy paymentStrategy = PaymentStrategyFactory.getPaymentStrategy(compraRequest.getMethod());
 
-    StatusCompra statusCompra = compraAprovada ? StatusCompra.FINALIZADA : StatusCompra.REPROVADA;
-
-    Compra compra = new Compra(compraRequest);
-    compra.setStatusCompra(statusCompra);
+    Compra compra = paymentStrategy.pay(compraRequest);
 
     repository.save(compra);
 
     return compra.toResponse();
-  }
-
-  private boolean verificarComBanco(UUID idCartao, BigDecimal valor) {
-    return true;
   }
 }

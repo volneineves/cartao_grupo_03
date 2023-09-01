@@ -3,6 +3,7 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.StatusCompra;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CompraRequest;
 import org.hibernate.annotations.CreationTimestamp;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CompraResponse;
