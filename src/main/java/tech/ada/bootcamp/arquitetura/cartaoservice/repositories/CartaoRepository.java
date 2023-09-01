@@ -6,10 +6,11 @@ import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Cartao;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Usuario;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface CartaoRepository extends JpaRepository<Cartao, String> {
-    List<Cartao> findCartaoByUsuario_Identificador(String identificador);
+public interface CartaoRepository extends JpaRepository<Cartao, UUID> {
+    List<Cartao> findCartaoByUsuarioId(UUID id);
     Cartao findCartaoByNumeroCartao(String numeroCartao);
 
 }
