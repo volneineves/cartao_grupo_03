@@ -3,6 +3,7 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CompraRequest;
 import org.hibernate.annotations.CreationTimestamp;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CompraResponse;
 
@@ -37,6 +38,21 @@ public class Compra {
     @ManyToOne
     @JoinColumn(name = "id_cartao", nullable = false)
     public Cartao cartao;
+
+
+    public Compra() {
+
+    }
+
+    public Compra(CompraRequest compraRequest) {
+        this.valor = compraRequest.getValor();
+        this.loja = compraRequest.getLoja();
+        Cartao cartao = new Cartao();
+        cartao.setNumeroCartao(compraRequest.getNumeroCartao());
+        this.cartao = cartao;
+        this.dataCompra = LocalDateTime.now();
+        this.statusCompra = StatusCompra.PENDENTE;
+    }
 
     public CompraResponse toResponse() {
         return new CompraResponse(cartao.getNumeroCartao(), loja, valor, statusCompra);
