@@ -3,6 +3,8 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CompraRequest;
+import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CompraResponse;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -28,4 +30,20 @@ public class Compra {
     @Column(nullable = false)
     private LocalDateTime dataCompra;
 
+    private String loja;
+
+    public Compra() {
+
+    }
+
+    public CompraResponse toResponse() {
+        return new CompraResponse(cartao.getNumeroCartao(), loja, valor, statusCompra);
+    }
+
+    public Compra(CompraRequest compraRequest) {
+        this.valor = compraRequest.getValor();
+        this.loja = compraRequest.getLoja();
+        this.dataCompra = LocalDateTime.now();
+        this.statusCompra = StatusCompra.PENDENTE;
+    }
 }
