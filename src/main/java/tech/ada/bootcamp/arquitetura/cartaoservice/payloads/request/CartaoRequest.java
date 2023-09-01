@@ -3,8 +3,8 @@ package tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.TipoCartao;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Usuario;
-import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.TipoCartao;
 
 import java.time.LocalDate;
 import java.util.UUID;
