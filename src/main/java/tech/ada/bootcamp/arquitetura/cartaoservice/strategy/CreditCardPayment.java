@@ -1,29 +1,35 @@
 package tech.ada.bootcamp.arquitetura.cartaoservice.strategy;
 
-import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Compra;
-import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.StatusCompra;
-import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CompraRequest;
-import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CompraResponse;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Purchase;
+import tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.PurchaseStatus;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import static tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.PurchaseStatus.APPROVED;
+import static tech.ada.bootcamp.arquitetura.cartaoservice.entities.enums.PurchaseStatus.DENIED;
+
 public class CreditCardPayment implements PaymentStrategy {
-  @Override
-  public Compra pay(CompraRequest compraRequest) {
 
-    boolean compraAprovada = verificarComBanco(compraRequest.getIdCartao(), compraRequest.getValor());
+    @Override
+    public void changeStatus(Purchase purchase) {
+        boolean isApprovedPurchase = checkWithBank(purchase.getId(), purchase.getAmount());
+        PurchaseStatus purchaseStatus = checkPurchaseStatus(isApprovedPurchase);
+        purchase.setPurchaseStatus(purchaseStatus);
+    }
 
-    StatusCompra statusCompra = compraAprovada ? StatusCompra.FINALIZADA : StatusCompra.REPROVADA;
+    private PurchaseStatus checkPurchaseStatus(Boolean isApprovedPurchase) {
+        if (isApprovedPurchase) {
+            return APPROVED;
+        } else {
+            return DENIED;
+        }
+    }
 
-    Compra compra = new Compra(compraRequest);
-    compra.setStatusCompra(statusCompra);
 
-    return compra;
-  }
+    private boolean checkWithBank(UUID idCartao, BigDecimal valor) {
+        System.out.println("COMPRA COM O CARTAO DE CREDITO");
+        return true;
+    }
 
-  private boolean verificarComBanco(UUID idCartao, BigDecimal valor) {
-    System.out.println("Compra com cartão de crédito realizada com sucesso!");
-    return true;
-  }
 }

@@ -9,11 +9,11 @@
     <changeSet id="init_create_table_usuario" author="matheus">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="usuario" />
+                <tableExists tableName="user" />
             </not>
         </preConditions>
 
-        <createTable tableName="usuario">
+        <createTable tableName="user">
 
             <column name="identificador" type="character varying(255)" >
                 <constraints primaryKey="true" nullable="false"  />

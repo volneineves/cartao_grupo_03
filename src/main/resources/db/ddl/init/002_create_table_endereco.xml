@@ -40,7 +40,7 @@
             <column name="complemento" type="character varying(255)" />
 
             <column name="usuarioIdentificador" type="character varying(255)">
-                <constraints foreignKeyName="fk_endereco_usuario_identificador" referencedTableName="usuario"
+                <constraints foreignKeyName="fk_endereco_usuario_identificador" referencedTableName="user"
                              referencedColumnNames="identificador" nullable="false" />
             </column>
         </createTable>
