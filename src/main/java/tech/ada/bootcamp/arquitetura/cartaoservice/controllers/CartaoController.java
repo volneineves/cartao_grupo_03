@@ -1,13 +1,20 @@
 package tech.ada.bootcamp.arquitetura.cartaoservice.controllers;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CartaoRequest;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CartaoResponse;
 import tech.ada.bootcamp.arquitetura.cartaoservice.services.CriarNovoCartaoService;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("cartoes")
@@ -21,37 +28,28 @@ public class CartaoController {
 
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public CartaoResponse create(@RequestBody CartaoRequest dto){
         return service.execute(dto);
     }
 
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/user/{id}")
     public List<CartaoResponse> getAllByUser(@PathVariable UUID id){
         return service.getAllByUser(id);
     }
 
-    @GetMapping("/getOne/{numeroCartao}")
-    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
     public CartaoResponse getOne(@PathVariable UUID id){
         return service.getOne(id);
     }
 
-    @PutMapping
-    @ResponseStatus(HttpStatus.OK)
-    public CartaoResponse edit(@RequestBody CartaoRequest cartaoRequest){
-        return service.edit(cartaoRequest);
+    @PutMapping("/{id}")
+    public CartaoResponse edit(@PathVariable UUID id, @RequestBody CartaoRequest cartaoRequest){
+        return service.edit(id, cartaoRequest);
     }
 
-    @DeleteMapping("/{numeroCartao}")
-    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable UUID id){
         return service.delete(id);
-
     }
-
-
-
 
 }

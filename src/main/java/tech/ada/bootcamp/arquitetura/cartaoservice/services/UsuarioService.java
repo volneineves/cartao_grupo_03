@@ -6,6 +6,7 @@ import tech.ada.bootcamp.arquitetura.cartaoservice.exceptions.DatabaseException;
 import tech.ada.bootcamp.arquitetura.cartaoservice.exceptions.ResourceAlreadyExistsException;
 import tech.ada.bootcamp.arquitetura.cartaoservice.exceptions.ResourceNotFoundException;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CadastroUsuarioRequest;
+import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.UpdateUsuarioRequest;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CadastroUsuarioResponse;
 import tech.ada.bootcamp.arquitetura.cartaoservice.repositories.UsuarioRepository;
 
@@ -43,7 +44,7 @@ public class UsuarioService {
         return usuario.toResponse();
     }
 
-    public CadastroUsuarioResponse update(UUID id, CadastroUsuarioRequest request) {
+    public CadastroUsuarioResponse update(UUID id, UpdateUsuarioRequest request) {
         Usuario usuario = findOrFailById(id);
         usuario.update(request);
         saveOrFail(usuario);

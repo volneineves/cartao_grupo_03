@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CadastroUsuarioRequest;
+import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.UpdateUsuarioRequest;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CadastroUsuarioResponse;
 
 import java.time.LocalDate;
@@ -54,7 +55,7 @@ public class Usuario {
         return new CadastroUsuarioResponse(id, nome, email, aniversario, endereco.toResponse(), criadoEm, atualizadoEm);
     }
 
-    public void update(CadastroUsuarioRequest request) {
+    public void update(UpdateUsuarioRequest request) {
         this.setNome(request.nome());
         this.setEmail(request.email());
         this.setAniversario(request.aniversario());

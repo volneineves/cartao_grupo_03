@@ -6,6 +6,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Cartao;
 import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Usuario;
+import tech.ada.bootcamp.arquitetura.cartaoservice.exceptions.CartaoNaoEncontradoException;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.TipoCartao;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CadastroUsuarioRequest;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CartaoRequest;
@@ -34,10 +35,10 @@ public class CriarNovoCartaoService {
         cartao.setTipoCartao(tipoCartaoAleatorio());
 
         //TODO aqui mesmo?
-        //Usuario usuario =  new Usuario();
-        //usuario.setIdentificador(cadastroUsuarioRequest.getIdentificador());
+        Usuario usuario =  new Usuario();
+        usuario.setId(cartaoRequest.getUsuarioId());
 
-        cartao.setUsuario(cartaoRequest.getUsuario());
+        cartao.setUsuario(usuario);
         cartao.setIdContaBanco(UUID.randomUUID().toString());
         cartao.setNomeTitular(cartaoRequest.getNomeTitular());
         cartao.setVencimentoCartao(dataAtual.plusYears(5));
@@ -73,6 +74,11 @@ public class CriarNovoCartaoService {
 
     public CartaoResponse getOne(UUID id){
         Optional<Cartao> cartaoOptional = this.cartaoRepository.findById(id);
+
+        if(cartaoOptional.isEmpty()){
+            throw new EntityNotFoundException("Este cartão não foi encontrado no banco de dados.");
+        }
+
         return cartaoOptional.get().dto();
     }
 
@@ -83,14 +89,19 @@ public class CriarNovoCartaoService {
                 .map(cartao -> cartao.dto()).collect(Collectors.toList());
     }
 
-    public CartaoResponse edit(CartaoRequest cartaoRequest){
-        Cartao cartao = cartaoRepository.findCartaoByNumeroCartao(cartaoRequest.getNumeroCartao());
+    public CartaoResponse edit(UUID id, CartaoRequest cartaoRequest){
+        Optional<Cartao> cartaoOp = cartaoRepository.findById(id);
 
-        //TODO melhorar isso ai
-        if(cartao == null){
-            throw new EntityNotFoundException("Este cartão não foi encontrado no banco de dados.");
+        if(cartaoOp.isEmpty()){
+            throw new CartaoNaoEncontradoException();
         }
 
+        Cartao cartao = cartaoOp.get();
+
+        Usuario usuario =  new Usuario();
+        usuario.setId(cartaoRequest.getUsuarioId());
+
+        cartao.setUsuario(usuario);
         cartao.setNumeroCartao(cartaoRequest.getNumeroCartao());
         cartao.setNomeTitular(cartaoRequest.getNomeTitular());
         cartao.setVencimentoCartao(cartaoRequest.getVencimentoCartao());
@@ -98,7 +109,6 @@ public class CriarNovoCartaoService {
         cartao.setTipoCartao(cartaoRequest.getTipoCartao());
         cartao.setIdContaBanco(cartao.getIdContaBanco());
         cartao.setDependente(cartaoRequest.getDependente());
-        cartao.setUsuario(cartaoRequest.getUsuario());
 
         cartao = cartaoRepository.save(cartao);
 
@@ -110,7 +120,7 @@ public class CriarNovoCartaoService {
 
     public String delete(UUID id){
         cartaoRepository.deleteById(id);
-        return "Cartão " + id + "deletado com sucesso";
+        return "Cartão " + id + " deletado com sucesso";
     }
 
 

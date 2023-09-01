@@ -62,11 +62,14 @@ public class Cartao {
         this.tipoCartao = dto.getTipoCartao();
         this.idContaBanco = dto.getIdContaBanco();
         this.dependente = dto.getDependente();
-        this.usuario = dto.getUsuario();
+        Usuario usuario = new Usuario();
+        usuario.setId(dto.getUsuarioId());
+        this.usuario = usuario;
     }
 
     public CartaoResponse dto(){
         CartaoResponse response = new CartaoResponse(
+                this.id,
                 this.numeroCartao,
                 this.nomeTitular,
                 this.vencimentoCartao,
@@ -74,7 +77,7 @@ public class Cartao {
                 this.tipoCartao,
                 this.idContaBanco,
                 this.dependente,
-                this.usuario
+                this.usuario.getId()
         );
 
         return response;

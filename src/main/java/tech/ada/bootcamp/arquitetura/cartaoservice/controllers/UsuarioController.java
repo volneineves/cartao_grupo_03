@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.CadastroUsuarioRequest;
+import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.request.UpdateUsuarioRequest;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response.CadastroUsuarioResponse;
 import tech.ada.bootcamp.arquitetura.cartaoservice.services.UsuarioService;
 
@@ -41,7 +42,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CadastroUsuarioResponse> update(@PathVariable UUID id, @RequestBody @Valid CadastroUsuarioRequest request) {
+    public ResponseEntity<CadastroUsuarioResponse> update(@PathVariable UUID id, @RequestBody @Valid UpdateUsuarioRequest request) {
         CadastroUsuarioResponse response = service.update(id, request);
         return ResponseEntity.ok(response);
     }

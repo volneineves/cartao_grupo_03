@@ -6,10 +6,12 @@ import tech.ada.bootcamp.arquitetura.cartaoservice.entities.Usuario;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.TipoCartao;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 public class CartaoResponse {
+    private UUID id;
     private String numeroCartao;
     private String nomeTitular;
     private LocalDate vencimentoCartao;
@@ -17,5 +19,5 @@ public class CartaoResponse {
     private TipoCartao tipoCartao;
     private String idContaBanco;
     private Boolean dependente;
-    private Usuario usuario;
+    private UUID usuarioId;
 }

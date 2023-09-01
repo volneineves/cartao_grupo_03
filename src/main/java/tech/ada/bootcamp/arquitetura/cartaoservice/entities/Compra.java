@@ -48,13 +48,13 @@ public class Compra {
         this.valor = compraRequest.getValor();
         this.loja = compraRequest.getLoja();
         Cartao cartao = new Cartao();
-        cartao.setNumeroCartao(compraRequest.getNumeroCartao());
+        cartao.setId(compraRequest.getIdCartao());
         this.cartao = cartao;
         this.dataCompra = LocalDateTime.now();
         this.statusCompra = StatusCompra.PENDENTE;
     }
 
     public CompraResponse toResponse() {
-        return new CompraResponse(cartao.getNumeroCartao(), loja, valor, statusCompra);
+        return new CompraResponse(cartao.getId(), loja, valor, statusCompra);
     }
 }

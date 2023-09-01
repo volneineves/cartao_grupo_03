@@ -10,6 +10,7 @@ import tech.ada.bootcamp.arquitetura.cartaoservice.repositories.CompraRepository
 import tech.ada.bootcamp.arquitetura.cartaoservice.repositories.FaturaRepository;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class RealizarCompraService {
 
   public CompraResponse execute(CompraRequest compraRequest) {
 
-    boolean compraAprovada = verificarComBanco(compraRequest.getNumeroCartao(), compraRequest.getValor());
+    boolean compraAprovada = verificarComBanco(compraRequest.getIdCartao(), compraRequest.getValor());
 
     StatusCompra statusCompra = compraAprovada ? StatusCompra.FINALIZADA : StatusCompra.REPROVADA;
 
@@ -31,7 +32,7 @@ public class RealizarCompraService {
     return compra.toResponse();
   }
 
-  private boolean verificarComBanco(String numeroCartao, BigDecimal valor) {
+  private boolean verificarComBanco(UUID idCartao, BigDecimal valor) {
     return true;
   }
 }

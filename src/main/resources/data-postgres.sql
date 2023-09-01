@@ -6,7 +6,7 @@ VALUES ('550e8400-e29b-41d4-a716-446655440000', '12345-678', 'Rua das Flores', '
 INSERT INTO usuario (id, nome, email, aniversario, criado_em, atualizado_em, id_endereco)
 VALUES ('6ba7b810-9dad-11d1-80b4-00c04fd430c8', 'Nome Exemplo', 'email.exemplo@email.com', '2023-01-01', '2023-01-01', '2023-01-01', '550e8400-e29b-41d4-a716-446655440000');
 
--- Inserindo um registro na tabela 'cartao'
+-- -- Inserindo um registro na tabela 'cartao'
 INSERT INTO cartao (id, numero_cartao, nome_titular, vencimento_cartao, codigo_seguranca, tipo_cartao, id_conta_banco, id_usuario)
 VALUES ('6ba7b811-9dad-11d1-80b4-00c04fd430c8', '1234567891011121', 'Nome Titular', '2023-01-01', '1234', 'PRATA', 'ID_CONTA_BANCO', '6ba7b810-9dad-11d1-80b4-00c04fd430c8');
 
