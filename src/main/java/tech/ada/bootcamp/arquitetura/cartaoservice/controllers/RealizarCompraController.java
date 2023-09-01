@@ -15,6 +15,6 @@ public class RealizarCompraController {
 
     @PostMapping(path = "", produces = "application/json" )
     public CompraResponse realizarCompra(@RequestBody CompraRequest compraRequest){
-        return new CompraResponse();
+        return null;
     }
 }

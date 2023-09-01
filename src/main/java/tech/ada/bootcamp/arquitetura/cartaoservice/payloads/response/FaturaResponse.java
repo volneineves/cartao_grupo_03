@@ -1,18 +1,19 @@
 package tech.ada.bootcamp.arquitetura.cartaoservice.payloads.response;
 
-import lombok.Data;
-
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
-@Data
-public class FaturaResponse {
-    private double valor;
-    private LocalDate dataFaturaGerada;
+public record FaturaResponse(UUID id,
 
-    private LocalDate referenciaFatura;
+                             LocalDate dataVencimento,
 
-    private List<CompraResponse> resumoCompra;
+                             LocalDate dataProcessamento,
 
+                             BigDecimal valor,
+
+                             BigDecimal valorPago,
+                             List<CompraResponse> resumoCompra) {
 
 }

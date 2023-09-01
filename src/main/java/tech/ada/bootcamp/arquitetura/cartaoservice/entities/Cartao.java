@@ -5,6 +5,8 @@ import lombok.Data;
 import tech.ada.bootcamp.arquitetura.cartaoservice.payloads.TipoCartao;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -40,5 +42,11 @@ public class Cartao {
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "cartao", fetch = FetchType.EAGER)
+    private List<Compra> compras;
+
+    @OneToMany(mappedBy = "cartao")
+    private List<Fatura> faturas = new ArrayList<>();
 
 }
