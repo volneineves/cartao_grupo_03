@@ -34,7 +34,7 @@ public class Invoice {
 
     public InvoiceResponse toResponse() {
         List<ResponsePurchase> purchaseResponses = getPurchaseResponses();
-        return new InvoiceResponse(id, processingDate, expirationDate, amount, amountPaid, purchaseResponses);
+        return new InvoiceResponse(id, processingDate, expirationDate, expirationDate.getMonth(), amount, amountPaid, purchaseResponses);
     }
 
     public List<ResponsePurchase> getPurchaseResponses() {
