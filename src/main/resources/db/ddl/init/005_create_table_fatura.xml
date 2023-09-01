@@ -31,7 +31,7 @@
             <column name="valorPago" type="decimal(18,2)" />
 
             <column name="numeroCartao" type="character varying(255)">
-                <constraints foreignKeyName="fk_fatura_numero_cartao" referencedTableName="cartao"
+                <constraints foreignKeyName="fk_fatura_numero_cartao" referencedTableName="card"
                              referencedColumnNames="numeroCartao" nullable="false" />
             </column>
 

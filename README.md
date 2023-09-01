@@ -1,8 +1,8 @@
 # ADA_1042_AQ1_SB_CartaoService
 Um sistema de uma operadora de cartão de crédito que permite ao 
 usuário **a aquisição de cartões de crédito**, **a adição de cartões 
-de dependentes**, **realizar compra com o cartão** e **ver fatura dos cartões**. 
-Ao realizar uma compra **deverá ser emitida uma notificação 
+de dependentes**, **realizar purchase com o cartão** e **ver fatura dos cartões**. 
+Ao realizar uma purchase **deverá ser emitida uma notificação 
 á operadora de crédito para efetuação do débito do valor**.
 
 ## Requisitos
